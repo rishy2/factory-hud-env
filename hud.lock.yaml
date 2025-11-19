@@ -1,0 +1,104 @@
+version: '1.1'
+images:
+  local: dummy_factory:0.1.2
+  full: dummy_factory:0.1.2@sha256:468e008cb1eed24aeb3eff906207e02096e056dbb6f427b15dc39413c026bb80
+  pushed: null
+build:
+  generatedAt: 2025-11-10T21:21:44.668563+00:00Z
+  hudVersion: 0.4.62
+  directory: dummy-factory
+  version: 0.1.2
+  sourceHash: c9aee95a425d342c4576cc02b6fa132c2db7f2a7d1eaa985ef01e51656a7baa5
+  sourceFiles:
+  - Dockerfile
+  - environment/README.md
+  - environment/__init__.py
+  - environment/factory_setup.py
+  - environment/models.py
+  - environment/pyproject.toml
+  - environment/server.py
+  - environment/uv.lock
+  - server/README.md
+  - server/__init__.py
+  - server/main.py
+  - server/pyproject.toml
+  - server/shared.py
+  - server/tools.py
+  - server/uv.lock
+environment:
+  initializeMs: 18294
+  toolCount: 8
+tools:
+- name: context
+  description: Get a full textual summary of the current factory graph, state, and
+    actions.
+  inputSchema:
+    properties: {}
+    type: object
+- name: state
+  description: Get the current structured state of the factory (balance, revenue,
+    inventory).
+  inputSchema:
+    properties: {}
+    type: object
+- name: graph
+  description: Get the raw dependency graph for the factory (nodes + links).
+  inputSchema:
+    properties: {}
+    type: object
+- name: buy
+  description: Buy raw materials using the factory balance.
+  inputSchema:
+    properties:
+      material_name:
+        title: Material Name
+        type: string
+      quantity:
+        title: Quantity
+        type: integer
+    required:
+    - material_name
+    - quantity
+    type: object
+- name: craft
+  description: Craft a product from available inventory materials.
+  inputSchema:
+    properties:
+      product_name:
+        title: Product Name
+        type: string
+      quantity:
+        title: Quantity
+        type: integer
+    required:
+    - product_name
+    - quantity
+    type: object
+- name: sell
+  description: Sell a crafted product to earn revenue.
+  inputSchema:
+    properties:
+      product_name:
+        title: Product Name
+        type: string
+      quantity:
+        title: Quantity
+        type: integer
+    required:
+    - product_name
+    - quantity
+    type: object
+- name: reset
+  description: Reset the factory environment to its initial state.
+  inputSchema:
+    properties: {}
+    type: object
+- name: evaluate
+  description: Evaluate how close the factory is to the target revenue.
+  inputSchema:
+    properties:
+      target_revenue:
+        default: 500.0
+        title: Target Revenue
+        type: number
+    type: object

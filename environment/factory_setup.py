@@ -193,6 +193,64 @@ class Factory:
             ]
         )
 
+    def reset(self):
+        """Reset the factory to its initial state."""
+        factory = Factory()
+
+        # Raw materials
+        factory.register_raw_material(RawMaterial("Fiber", cost=2.0))
+        factory.register_raw_material(RawMaterial("Metal", cost=0.5))
+        factory.register_raw_material(RawMaterial("Chemicals", cost=0.25))
+        factory.register_raw_material(RawMaterial("Polymers", cost=0.25))
+        factory.register_raw_material(RawMaterial("Minerals", cost=0.5))
+
+        # Base & composite products
+        factory.register_product(Product("Reinforced Fabric", {"Fiber": 2, "Metal": 1}))
+        factory.register_product(
+            Product("Spacesuit", {"Reinforced Fabric": 4}, sell_price=30)
+        )
+        factory.register_product(Product("Resins", {"Chemicals": 3, "Polymers": 1}))
+        factory.register_product(Product("Antenna", {"Metal": 3, "Resins": 2}))
+        factory.register_product(Product("Heat Shield", {"Resins": 1, "Polymers": 2}))
+        factory.register_product(
+            Product("Insulation Panels", {"Resins": 2, "Polymers": 3})
+        )
+        factory.register_product(
+            Product("Map System", {"Antenna": 3, "Heat Shield": 1}, sell_price=140)
+        )
+        factory.register_product(
+            Product(
+                "Calling System", {"Antenna": 2, "Insulation Panels": 2}, sell_price=150
+            )
+        )
+        factory.register_product(Product("Wires", {"Polymers": 3}))
+        factory.register_product(
+            Product("Plastic Shells", {"Polymers": 1, "Minerals": 3})
+        )
+        factory.register_product(
+            Product("Batteries", {"Wires": 2, "Plastic Shells": 1})
+        )
+        factory.register_product(Product("Power Cores", {"Batteries": 4}))
+        factory.register_product(Product("Catalyst", {"Minerals": 3}))
+        factory.register_product(
+            Product("Air Purifier", {"Plastic Shells": 1, "Catalyst": 3})
+        )
+        factory.register_product(
+            Product("Life Jacket", {"Air Purifier": 2}, sell_price=165)
+        )
+        factory.register_product(
+            Product("Escape Pods", {"Heat Shield": 3, "Power Cores": 1}, sell_price=130)
+        )
+        factory.register_product(
+            Product(
+                "Survey Probes",
+                {"Insulation Panels": 2, "Power Cores": 2},
+                sell_price=120,
+            )
+        )
+
+        return factory
+
 
 # -----------------------------------------------------------
 # Initialize factory and register everything once

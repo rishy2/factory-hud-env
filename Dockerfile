@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir ./environment
 COPY server/ ./server/
 COPY environment/ ./environment/
 
-ENV ENV_SERVER_PORT=8005
+ENV ENV_SERVER_PORT=8000
 
 # Start environment server in background, then run MCP server with hot-reload
 CMD ["sh", "-c", "uvicorn environment.server:app --host 0.0.0.0 --port $ENV_SERVER_PORT --log-level warning --reload >&2 & sleep 0.5 && hud dev server.main --stdio"]

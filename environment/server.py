@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from factory_setup import factory  # your initialized instance
+from environment.factory_setup import factory
 
 import logging
 import sys
@@ -133,7 +133,7 @@ def sell(req: SellRequest):
 def reset():
     """Reset factory to its initial starting state."""
     global factory
-    factory = factory.__class__()  # create a fresh instance
+    factory = factory.reset()
     log.info("Factory reset.")
     return {"message": "Factory reset.", "state": factory.get_state()}
 
